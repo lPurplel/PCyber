@@ -1,0 +1,45 @@
+{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Корзина{% endblock %}
+
+
+{% block content %}
+<div class="block" id="block">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Моя корзина</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td><img src="{{ item.product.image.url }}" style="width: 128px;" alt="{{ item.product.name }}"></td>
+                    <td>{{ item.product.price }} &#8376;</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.total_cost }} &#8376;</td>
+                    <td>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <input type="submit" class="btn btn-danger" name="submit" value="Удалить">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h1>Итого: {{ cart_subtotal }}</h1>
+        <a href="{% url 'index' %}" class="btn btn-primary">Продолжить покупку</a>
+        <a href="{% url 'checkout' %}" class="btn btn-primary">Оформить заказ</a>
+
+    </div>
+</div>
+{% endblock %}

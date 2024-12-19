@@ -1,0 +1,17 @@
+{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Создать аккаунт{% endblock %}
+
+
+{% block content %}
+<div class="block" id="block">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Регистрация</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+          <button class="btn btn-primary">Создать аккаунт</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

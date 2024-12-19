@@ -1,0 +1,41 @@
+{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{ product.name }}{% endblock %}
+
+
+{% block content %}
+<div class="block" id="block">
+    <div class="container">
+        <h1 class="display-5 fw-bold">{{ product.name }}</h1>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{{ product.image.url }}" class="w-100" alt="{{ product.name }}">
+                        <h3 class="card-title">{{ product.price }} &#8376;</h3>
+                        <form action="{% url 'product_detail' product.id product.slug %}" method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-outline-primary">Добавить в корзину</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p>
+                            <strong>Описание продукта: </strong>
+                            {{ product.description }}
+                        </p>
+                        <span class="badge text-bg-primary">{{ product.category.name }}</span>
+                        <div class="d-block mt-3">
+                            <a href="#" class="btn btn-primary">Похожие товары</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

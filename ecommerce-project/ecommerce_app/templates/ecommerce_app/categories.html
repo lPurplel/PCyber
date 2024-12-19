@@ -1,0 +1,25 @@
+{% extends './base.html' %}
+
+{% block title %}Категории{% endblock %}
+
+
+{% block content %}
+<div class="block" id="block">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Категории</h1>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-md-3">
+                <div class="card border-0 shadow p-3 mb-5 bg-body-tertiary rounded">
+                    <img src="{{ category.image.url }}" class="card-img-top" alt="{{ category.name }}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ category.name }}</h5>
+                      <a href="{% url 'products_by_category' slug=category.slug %}" class="btn btn-primary">Смотреть</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
