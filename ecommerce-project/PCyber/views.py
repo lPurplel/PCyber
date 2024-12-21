@@ -7,13 +7,12 @@ from django.contrib.auth import login, logout
 from . import cart
 
 
-
 # главная страница
 def index(request):
     all_products = Product.objects.all()
-    return render(request, "ecommerce_app/index.html", {
-                                    'all_products': all_products,
-                                    })
+    return render(request, "PCyber/index.html", {
+        'all_products': all_products,
+    })
 
 
 # информация товара
@@ -28,24 +27,26 @@ def show_product(request, product_id, product_slug):
             return redirect('show_cart')
 
     form = CartForm(request, initial={'product_id': product.id})
-    return render(request, 'ecommerce_app/product_detail.html', {
-                                            'product': product,
-                                            'form': form,
-                                            })
+    return render(request, 'PCyber/product_detail.html', {
+        'product': product,
+        'form': form,
+    })
 
 
 # все категории
 def all_categories(request):
     categories = Category.objects.all()
-    return render(request, "ecommerce_app/categories.html", {
+    return render(request, "PCyber/categories.html", {
         'categories': categories
     })
 
 # товары по категориям
+
+
 def products_by_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = Product.objects.filter(category=category)
-    return render(request, "ecommerce_app/products_by_category.html", {
+    return render(request, "PCyber/products_by_category.html", {
         'category': category,
         'products': products
     })
@@ -62,10 +63,10 @@ def show_cart(request):
 
     cart_items = cart.get_all_cart_items(request)
     cart_subtotal = cart.subtotal(request)
-    return render(request, 'ecommerce_app/cart.html', {
-                                            'cart_items': cart_items,
-                                            'cart_subtotal': cart_subtotal,
-                                            })
+    return render(request, 'PCyber/cart.html', {
+        'cart_items': cart_items,
+        'cart_subtotal': cart_subtotal,
+    })
 
 
 # оформление заказа
@@ -75,20 +76,20 @@ def checkout(request):
         if form.is_valid():
             cleaned_data = form.cleaned_data
             o = Order(
-                name = cleaned_data.get('name'),
-                email = cleaned_data.get('email'),
-                phone = cleaned_data.get('phone'),
-                address = cleaned_data.get('address'),
+                name=cleaned_data.get('name'),
+                email=cleaned_data.get('email'),
+                phone=cleaned_data.get('phone'),
+                address=cleaned_data.get('address'),
             )
             o.save()
 
             all_items = cart.get_all_cart_items(request)
             for cart_item in all_items:
                 li = LineItem(
-                    product_id = cart_item.product_id,
-                    price = cart_item.price,
-                    quantity = cart_item.quantity,
-                    order_id = o.id
+                    product_id=cart_item.product_id,
+                    price=cart_item.price,
+                    quantity=cart_item.quantity,
+                    order_id=o.id
                 )
 
                 li.save()
@@ -99,17 +100,18 @@ def checkout(request):
 
             return redirect('success_order')
 
-
     else:
         form = CheckoutForm()
-        return render(request, 'ecommerce_app/checkout.html', {'form': form})
+        return render(request, 'PCyber/checkout.html', {'form': form})
 
 
 # сообщение оформленного заказа
 def success_order(request):
-    return render(request, 'ecommerce_app/success.html')
+    return render(request, 'PCyber/success.html')
 
 # регистрация
+
+
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -119,8 +121,7 @@ def register(request):
             return redirect('login_view')
     else:
         form = SignUpForm()
-    return render(request, 'ecommerce_app/register.html', {'form': form})
-
+    return render(request, 'PCyber/register.html', {'form': form})
 
 
 # авторизация
@@ -133,9 +134,11 @@ def login_view(request):
             return redirect('index')
     else:
         form = LoginForm()
-    return render(request, 'ecommerce_app/login.html', {'form': form})
+    return render(request, 'PCyber/login.html', {'form': form})
 
 # выход
+
+
 def logout_view(request):
     logout(request)
     return redirect('index')
