@@ -22,9 +22,9 @@
                 <tr>
                     <td>{{ item.product.name }}</td>
                     <td><img src="{{ item.product.image.url }}" style="width: 128px;" alt="{{ item.product.name }}"></td>
-                    <td>{{ item.product.price }} &#8376;</td>
+                    <td>{{ item.product.price }} &#8381;</td>
                     <td>{{ item.quantity }}</td>
-                    <td>{{ item.total_cost }} &#8376;</td>
+                    <td>{{ item.total_cost }} &#8381;</td>
                     <td>
                         <form method="post">
                             {% csrf_token %}
@@ -36,7 +36,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <h1>Итого: {{ cart_subtotal }}</h1>
+        <h1>Итого: {{ cart_subtotal }} &#8381;</h1>
         <a href="{% url 'index' %}" class="btn btn-primary">Продолжить покупку</a>
         <a href="{% url 'checkout' %}" class="btn btn-primary">Оформить заказ</a>
 

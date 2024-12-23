@@ -1,5 +1,5 @@
 .bg-pink {
-    background-color: pink;
+    background-color:   #1f0043
 }
 .fs-64 {
     font-size: 64px;
@@ -12,6 +12,26 @@
     align-items: center;
 }
 
+.cover-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.navind {
+    background-color: #380475;
+    color: white;
+}
+body {
+    background-color: #000000;
+    color: white;
+}
+.btn btn {
+    background-color: #380475;
+    color: white;
+}
+.white {
+    color: white;
+}
 .cover-img {
     width: 100%;
     height: 300px;

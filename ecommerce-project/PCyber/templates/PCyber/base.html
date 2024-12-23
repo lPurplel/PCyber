@@ -14,8 +14,14 @@
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+  <style>
+    body {
+      background-color: #000000;
+      color: white;
+      padding-top: 56px;
+    }
+  </style>
+  <nav class="navbar navbar-expand-lg navind navbar-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="{%url 'index'%}"><i class="fa-solid fa-cart-shopping"></i> PCyber</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -56,12 +62,10 @@
     </div>
   </nav>
 
-
   <main>
     {% block content %}
     {% endblock %}
   </main>
-
 
   <script src="{% static './js/bootstrap.bundle.min.js' %}"></script>
 </body>

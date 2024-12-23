@@ -2,17 +2,16 @@
 {% load crispy_forms_tags %}
 {% block title %}{{ product.name }}{% endblock %}
 
-
 {% block content %}
 <div class="block" id="block">
     <div class="container">
-        <h1 class="display-5 fw-bold">{{ product.name }}</h1>
+        <h1 class="display-5 fw-bold text-white">{{ product.name }}</h1>
         <div class="row">
             <div class="col-md-4 mb-3">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body navind text-white">
                         <img src="{{ product.image.url }}" class="w-100" alt="{{ product.name }}">
-                        <h3 class="card-title">{{ product.price }} &#8376;</h3>
+                        <h3 class="card-title">{{ product.price }} &#8381;</h3>
                         <form action="{% url 'product_detail' product.id product.slug %}" method="post">
                             {% csrf_token %}
                             {{ form|crispy }}
@@ -23,15 +22,12 @@
             </div>
             <div class="col-md-8 mb-3">
                 <div class="card h-100">
-                    <div class="card-body">
+                    <div class="card-body navind text-white">
                         <p>
                             <strong>Описание продукта: </strong>
                             {{ product.description }}
                         </p>
                         <span class="badge text-bg-primary">{{ product.category.name }}</span>
-                        <!-- <div class="d-block mt-3">
-                            <a href="#" class="btn btn-primary">Похожие товары</a>
-                        </div> Это нахуй вырезать надо -->
                     </div>
                 </div>
             </div>

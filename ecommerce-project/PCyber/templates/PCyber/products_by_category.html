@@ -14,7 +14,7 @@
                     <img src="{{ product.image.url }}" class="card-img-top" alt="{{product.name}}">
                     <div class="card-body">
                       <h5 class="card-title">{{ product.name }}</h5>
-                      <p class="card-text">{{ product.price }} &#8376;</p>
+                      <p class="card-text">{{ product.price }} &#8381;</p>
                       <a href="{% url 'product_detail' product_id=product.pk product_slug=product.slug %}" class="btn btn-primary">Обзор</a>
                     </div>
                 </div>
